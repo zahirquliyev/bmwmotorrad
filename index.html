@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="html-root">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -155,6 +155,35 @@ body {
   transition: background var(--tr);
 }
 .nav-join:hover { background: var(--bmw-blue-d); }
+
+/* ── Language switcher ── */
+.lang-switch {
+  display: flex; align-items: center; gap: 2px;
+  margin-left: 14px; flex-shrink: 0;
+}
+.lang-btn {
+  font-family: var(--ff-d); font-size: 11px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  background: none; border: none; cursor: pointer;
+  padding: 5px 8px; border-radius: 3px;
+  transition: color var(--tr), background var(--tr);
+  line-height: 1;
+}
+.lang-btn.active {
+  color: white; background: var(--bmw-blue);
+}
+.lang-btn:not(.active) {
+  color: rgba(255,255,255,0.45);
+}
+#nav.on-light .lang-btn.active { color: white; background: var(--bmw-blue); }
+#nav.on-light .lang-btn:not(.active) { color: var(--text-m); }
+.lang-btn:not(.active):hover { color: white; }
+#nav.on-light .lang-btn:not(.active):hover { color: var(--text-h); }
+.lang-sep {
+  width: 1px; height: 12px;
+  background: rgba(255,255,255,0.2); flex-shrink: 0;
+}
+#nav.on-light .lang-sep { background: var(--surface-3); }
 
 /* ══════════════════════════════════════════════════════
    HERO SLIDER  — exact BMW Motorrad style
@@ -762,21 +791,26 @@ footer {
     <div class="nav-divider"></div>
     <button class="nav-menu-btn" aria-label="Menu">
       <span class="ham"><span></span><span></span><span></span></span>
-      MENU
+      <span data-en="MENU" data-az="MENYU">MENU</span>
     </button>
   </div>
 
   <!-- CENTER: nav links -->
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#events">Events</a></li>
-    <li><a href="#members">Members</a></li>
-    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#about" data-en="About" data-az="Haqqımızda">About</a></li>
+    <li><a href="#events" data-en="Events" data-az="Tədbirlər">Events</a></li>
+    <li><a href="#members" data-en="Members" data-az="Üzvlər">Members</a></li>
+    <li><a href="#gallery" data-en="Gallery" data-az="Qalereya">Gallery</a></li>
   </ul>
 
-  <!-- RIGHT: join -->
+  <!-- RIGHT: lang switcher + join -->
   <div class="nav-right-col">
-    <a href="#contact" class="nav-join">Join the Club</a>
+    <div class="lang-switch">
+      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+      <div class="lang-sep"></div>
+      <button class="lang-btn" id="btn-az" onclick="setLang('az')">AZ</button>
+    </div>
+    <a href="#contact" class="nav-join" data-en="Join the Club" data-az="Kluba Qoşul">Join the Club</a>
   </div>
 </nav>
 
@@ -795,10 +829,10 @@ footer {
       <div class="bs-wheel-r"></div>
     </div>
     <div class="slide-content">
-      <div class="slide-eyebrow">BMW Motorrad Club Azerbaijan</div>
-      <h1 class="slide-title">RIDE<br/>TOGETHER</h1>
-      <p class="slide-sub">A brotherhood of passionate riders exploring the roads and mountains of Azerbaijan on BMW motorcycles.</p>
-      <a href="#about" class="slide-btn">Discover the Club</a>
+      <div class="slide-eyebrow" data-en="BMW Motorrad Club Azerbaijan" data-az="BMW Motorrad Klubu Azərbaycan">BMW Motorrad Club Azerbaijan</div>
+      <h1 class="slide-title" data-en="RIDE<br/>TOGETHER" data-az="BİRLİKDƏ<br/>SÜRÜN">RIDE<br/>TOGETHER</h1>
+      <p class="slide-sub" data-en="A brotherhood of passionate riders exploring the roads and mountains of Azerbaijan on BMW motorcycles." data-az="BMW motosikletlərində Azərbaycanın yollarını və dağlarını kəşf edən ehtiraslı sürücülərin qardaşlığı.">A brotherhood of passionate riders exploring the roads and mountains of Azerbaijan on BMW motorcycles.</p>
+      <a href="#about" class="slide-btn" data-en="Discover the Club" data-az="Klubu Kəşf Et">Discover the Club</a>
     </div>
   </div>
 
@@ -808,10 +842,10 @@ footer {
     <div class="slide-overlay"></div>
     <div class="slide-overlay-b"></div>
     <div class="slide-content">
-      <div class="slide-eyebrow">Club Calendar · 2025</div>
-      <h1 class="slide-title">LAHIJ<br/>PASS RIDE</h1>
-      <p class="slide-sub">Join us on 14 June for a spectacular mountain ride through the ancient village of Lahij and the Ismayilli highlands.</p>
-      <a href="#events" class="slide-btn">View Events</a>
+      <div class="slide-eyebrow" data-en="Club Calendar · 2025" data-az="Klub Təqvimi · 2025">Club Calendar · 2025</div>
+      <h1 class="slide-title" data-en="LAHIJ<br/>PASS RIDE" data-az="LAHİC<br/>KEÇID SÜRÜŞÜ">LAHIJ<br/>PASS RIDE</h1>
+      <p class="slide-sub" data-en="Join us on 14 June for a spectacular mountain ride through the ancient village of Lahij and the Ismayilli highlands." data-az="14 İyun tarixdə qədim Lahıc kəndi və İsmayıllı dağlığından keçən möhtəşəm dağ sürüşünə qoşulun.">Join us on 14 June for a spectacular mountain ride through the ancient village of Lahij and the Ismayilli highlands.</p>
+      <a href="#events" class="slide-btn" data-en="View Events" data-az="Tədbirlərə Bax">View Events</a>
     </div>
   </div>
 
@@ -821,10 +855,10 @@ footer {
     <div class="slide-overlay"></div>
     <div class="slide-overlay-b"></div>
     <div class="slide-content">
-      <div class="slide-eyebrow">Open Membership · 2025</div>
-      <h1 class="slide-title">YOUR<br/>SEAT<br/>AWAITS</h1>
-      <p class="slide-sub">We have one open seat for an exceptional BMW rider. Be part of the club that defines motorcycle culture in Azerbaijan.</p>
-      <a href="#contact" class="slide-btn">Apply to Join</a>
+      <div class="slide-eyebrow" data-en="Open Membership · 2025" data-az="Açıq Üzvlük · 2025">Open Membership · 2025</div>
+      <h1 class="slide-title" data-en="YOUR<br/>SEAT<br/>AWAITS" data-az="YERİNİZ<br/>SİZİ<br/>GÖZLƏYİR">YOUR<br/>SEAT<br/>AWAITS</h1>
+      <p class="slide-sub" data-en="We have one open seat for an exceptional BMW rider. Be part of the club that defines motorcycle culture in Azerbaijan." data-az="İstisna bir BMW sürücüsü üçün bir açıq yerimiz var. Azərbaycanda motosiklet mədəniyyətini müəyyən edən klubun bir hissəsi olun.">We have one open seat for an exceptional BMW rider. Be part of the club that defines motorcycle culture in Azerbaijan.</p>
+      <a href="#contact" class="slide-btn" data-en="Apply to Join" data-az="Qoşulmaq üçün Müraciət Et">Apply to Join</a>
     </div>
   </div>
 
@@ -853,38 +887,38 @@ footer {
 
 <!-- ══ QUICKNAV ══ -->
 <div id="quicknav">
-  <a href="#about" class="qn-item"><span class="qn-icon">◈</span> About the Club</a>
-  <a href="#events" class="qn-item"><span class="qn-icon">◷</span> Upcoming Rides</a>
-  <a href="#members" class="qn-item"><span class="qn-icon">◉</span> Our Riders</a>
-  <a href="#gallery" class="qn-item"><span class="qn-icon">▦</span> Gallery</a>
-  <a href="#contact" class="qn-item"><span class="qn-icon">◎</span> Join the Club</a>
+  <a href="#about" class="qn-item"><span class="qn-icon">◈</span> <span data-en="About the Club" data-az="Klub Haqqında">About the Club</span></a>
+  <a href="#events" class="qn-item"><span class="qn-icon">◷</span> <span data-en="Upcoming Rides" data-az="Gözlənilən Sürüşlər">Upcoming Rides</span></a>
+  <a href="#members" class="qn-item"><span class="qn-icon">◉</span> <span data-en="Our Riders" data-az="Sürücülərimiz">Our Riders</span></a>
+  <a href="#gallery" class="qn-item"><span class="qn-icon">▦</span> <span data-en="Gallery" data-az="Qalereya">Gallery</span></a>
+  <a href="#contact" class="qn-item"><span class="qn-icon">◎</span> <span data-en="Join the Club" data-az="Kluba Qoşul">Join the Club</span></a>
 </div>
 
 <!-- ══ ABOUT ══ -->
 <section id="about">
   <div class="about-l">
-    <div class="s-eye">About the Club</div>
-    <h2 class="s-h">Ride Together,<br/>Go Further</h2>
-    <p class="s-p">
+    <div class="s-eye" data-en="About the Club" data-az="Klub Haqqında">About the Club</div>
+    <h2 class="s-h" data-en="Ride Together,<br/>Go Further" data-az="Birlikdə Sürün,<br/>Daha Uzağa Get">Ride Together,<br/>Go Further</h2>
+    <p class="s-p" data-en="BMW Motorrad Club Azerbaijan is built on a simple belief — the roads of this country deserve to be explored on the finest motorcycles ever built. Our close-knit community shares a commitment to the machine, the route, and each other." data-az="BMW Motorrad Klubu Azərbaycan sadə bir inanc üzərində qurulub — bu ölkənin yolları indiyə qədər istehsal edilmiş ən yaxşı motosikletlər üzərində kəşf edilməyə layiqdir. Bizim sıx birlikdə olan icmamız maşına, marşruta və bir-birinə sadiqliyi paylaşır.">
       BMW Motorrad Club Azerbaijan is built on a simple belief — the roads of this country deserve
       to be explored on the finest motorcycles ever built. Our close-knit community shares a commitment
       to the machine, the route, and each other.
     </p>
-    <p class="s-p" style="margin-top:12px;">
+    <p class="s-p" style="margin-top:12px;" data-en="From Caucasus mountain passes to the Caspian coast at sunset, we ride Azerbaijan in the spirit BMW Motorrad was built for: precision, adventure, and freedom." data-az="Qafqaz dağ keçidlərindən günbatan zamanı Xəzər sahilinə qədər, BMW Motorrad-ın ruhunda Azərbaycanı sürürük: dəqiqlik, macəra və azadlıq.">
       From Caucasus mountain passes to the Caspian coast at sunset, we ride Azerbaijan
       in the spirit BMW Motorrad was built for: precision, adventure, and freedom.
     </p>
     <div class="about-pillars">
-      <div class="pillar"><div class="pt">Brotherhood</div><div class="pd">Every rider looks out for the pack, on and off the road.</div></div>
-      <div class="pillar"><div class="pt">Precision</div><div class="pd">BMW-grade standards in both machines and route planning.</div></div>
-      <div class="pillar"><div class="pt">Adventure</div><div class="pd">New roads, new horizons. Always pushing further.</div></div>
-      <div class="pillar"><div class="pt">Safety</div><div class="pd">Full gear, every ride. No exceptions, no shortcuts.</div></div>
+      <div class="pillar"><div class="pt" data-en="Brotherhood" data-az="Qardaşlıq">Brotherhood</div><div class="pd" data-en="Every rider looks out for the pack, on and off the road." data-az="Hər sürücü yolda və yoldan kənarda dəstəyə baxır.">Every rider looks out for the pack, on and off the road.</div></div>
+      <div class="pillar"><div class="pt" data-en="Precision" data-az="Dəqiqlik">Precision</div><div class="pd" data-en="BMW-grade standards in both machines and route planning." data-az="Həm maşınlarda, həm də marşrut planlaşdırmasında BMW səviyyəsindəki standartlar.">BMW-grade standards in both machines and route planning.</div></div>
+      <div class="pillar"><div class="pt" data-en="Adventure" data-az="Macəra">Adventure</div><div class="pd" data-en="New roads, new horizons. Always pushing further." data-az="Yeni yollar, yeni üfüqlər. Həmişə daha irəliyə.">New roads, new horizons. Always pushing further.</div></div>
+      <div class="pillar"><div class="pt" data-en="Safety" data-az="Təhlükəsizlik">Safety</div><div class="pd" data-en="Full gear, every ride. No exceptions, no shortcuts." data-az="Tam avadanlıq, hər sürüş. İstisnasız, qısa yolsuz.">Full gear, every ride. No exceptions, no shortcuts.</div></div>
     </div>
   </div>
   <div class="about-r">
     <div class="about-r-bg"></div>
     <div class="about-big-text">BMW<br/>MOTO</div>
-    <div class="about-badge">Baku, Azerbaijan</div>
+    <div class="about-badge" data-en="Baku, Azerbaijan" data-az="Bakı, Azərbaycan">Baku, Azerbaijan</div>
     <div class="about-yr">2024</div>
   </div>
 </section>
@@ -892,35 +926,35 @@ footer {
 <!-- ══ EVENTS ══ -->
 <section id="events">
   <div class="section-head">
-    <div><div class="s-eye">Club Calendar</div><h2 class="s-h">Upcoming Rides</h2></div>
-    <a href="#contact" class="btn-outline">All Events</a>
+    <div><div class="s-eye" data-en="Club Calendar" data-az="Klub Təqvimi">Club Calendar</div><h2 class="s-h" data-en="Upcoming Rides" data-az="Gözlənilən Sürüşlər">Upcoming Rides</h2></div>
+    <a href="#contact" class="btn-outline" data-en="All Events" data-az="Bütün Tədbirlər">All Events</a>
   </div>
   <div class="ev-grid">
     <div class="ev-card">
       <div class="ev-img"><div class="ev-img-inner ei-1" style="background-image:url('https://images.unsplash.com/photo-1677166270367-0687b04b7146?w=700&q=85');background-size:cover;background-position:center;"></div><div class="ev-img-hov"></div></div>
       <div class="ev-body">
-        <div class="ev-top"><span class="ev-date">14 June 2025</span><span class="ev-tag">Day Ride</span></div>
-        <div class="ev-title">Lahij Mountain Pass</div>
-        <div class="ev-loc">Ismayilli · ~280 km round trip</div>
-        <div class="ev-more">Details</div>
+        <div class="ev-top"><span class="ev-date">14 June 2025</span><span class="ev-tag" data-en="Day Ride" data-az="Gündəlik Sürüş">Day Ride</span></div>
+        <div class="ev-title" data-en="Lahij Mountain Pass" data-az="Lahıc Dağ Keçidi">Lahij Mountain Pass</div>
+        <div class="ev-loc" data-en="Ismayilli · ~280 km round trip" data-az="İsmayıllı · ~280 km gedib-gəlmə">Ismayilli · ~280 km round trip</div>
+        <div class="ev-more" data-en="Details" data-az="Ətraflı">Details</div>
       </div>
     </div>
     <div class="ev-card">
       <div class="ev-img"><div class="ev-img-inner ei-2" style="background-image:url('https://images.unsplash.com/photo-1657873956202-62890bd39a5c?w=700&q=85');background-size:cover;background-position:center;"></div><div class="ev-img-hov"></div></div>
       <div class="ev-body">
-        <div class="ev-top"><span class="ev-date">22 June 2025</span><span class="ev-tag">Weekend</span></div>
-        <div class="ev-title">Sheki Caravanserai Route</div>
-        <div class="ev-loc">Sheki · ~460 km · 2 days</div>
-        <div class="ev-more">Details</div>
+        <div class="ev-top"><span class="ev-date">22 June 2025</span><span class="ev-tag" data-en="Weekend" data-az="Həftəsonu">Weekend</span></div>
+        <div class="ev-title" data-en="Sheki Caravanserai Route" data-az="Şəki Karvansaray Marşrutu">Sheki Caravanserai Route</div>
+        <div class="ev-loc" data-en="Sheki · ~460 km · 2 days" data-az="Şəki · ~460 km · 2 gün">Sheki · ~460 km · 2 days</div>
+        <div class="ev-more" data-en="Details" data-az="Ətraflı">Details</div>
       </div>
     </div>
     <div class="ev-card">
       <div class="ev-img"><div class="ev-img-inner ei-3" style="background-image:url('https://images.unsplash.com/photo-1679252439326-ccd0a69abbf2?w=700&q=85');background-size:cover;background-position:center;"></div><div class="ev-img-hov"></div></div>
       <div class="ev-body">
-        <div class="ev-top"><span class="ev-date">05 July 2025</span><span class="ev-tag">Evening</span></div>
-        <div class="ev-title">Baku Coastal Sunset Ride</div>
-        <div class="ev-loc">Baku Boulevard · ~60 km loop</div>
-        <div class="ev-more">Details</div>
+        <div class="ev-top"><span class="ev-date">05 July 2025</span><span class="ev-tag" data-en="Evening" data-az="Axşam">Evening</span></div>
+        <div class="ev-title" data-en="Baku Coastal Sunset Ride" data-az="Bakı Sahil Günbatan Sürüşü">Baku Coastal Sunset Ride</div>
+        <div class="ev-loc" data-en="Baku Boulevard · ~60 km loop" data-az="Bakı Bulvarı · ~60 km dövrə">Baku Boulevard · ~60 km loop</div>
+        <div class="ev-more" data-en="Details" data-az="Ətraflı">Details</div>
       </div>
     </div>
   </div>
@@ -928,21 +962,21 @@ footer {
 
 <!-- ══ MEMBERS ══ -->
 <section id="members">
-  <div class="s-eye">The Riders</div>
-  <h2 class="s-h inv" style="margin-bottom:4px;">Meet the Club</h2>
-  <p class="s-p inv">Seven riders. One mission. Every road in Azerbaijan.</p>
+  <div class="s-eye" data-en="The Riders" data-az="Sürücülər">The Riders</div>
+  <h2 class="s-h inv" style="margin-bottom:4px;" data-en="Meet the Club" data-az="Klubla Tanış Olun">Meet the Club</h2>
+  <p class="s-p inv" data-en="Seven riders. One mission. Every road in Azerbaijan." data-az="Yeddi sürücü. Bir missiya. Azərbaycandakı hər yol.">Seven riders. One mission. Every road in Azerbaijan.</p>
   <div class="members-grid">
-    <div class="m-card"><div class="m-bar"></div><div class="m-av"><div class="m-av-bg" style="background-image:url('https://images.unsplash.com/photo-1635073943212-f34dfbfcc3b0?w=400&q=85');background-size:cover;background-position:center;"></div><div class="m-nr">#001</div></div><div class="m-info"><div class="m-name">Elvin Hasanov</div><div class="m-role">Club President</div><div class="m-bike">BMW R 1250 GS Adventure</div></div></div>
-    <div class="m-card"><div class="m-bar"></div><div class="m-av"><div class="m-av-bg" style="background-image:url('https://images.unsplash.com/photo-1635073948138-df07998b9135?w=400&q=85');background-size:cover;background-position:center;"></div><div class="m-nr">#002</div></div><div class="m-info"><div class="m-name">Anar Rzayev</div><div class="m-role">Road Captain</div><div class="m-bike">BMW S 1000 RR</div></div></div>
-    <div class="m-card"><div class="m-bar"></div><div class="m-av"><div class="m-av-bg" style="background-image:url('https://images.unsplash.com/photo-1685478564483-3613fbe7acb0?w=400&q=85');background-size:cover;background-position:center;"></div><div class="m-nr">#003</div></div><div class="m-info"><div class="m-name">Nigar Karimova</div><div class="m-role">Events Lead</div><div class="m-bike">BMW F 900 R</div></div></div>
-    <div class="m-card"><div class="m-bar"></div><div class="m-av"><div class="m-av-bg" style="background-image:url('https://images.unsplash.com/photo-1685478564488-6892188cb6b6?w=400&q=85');background-size:cover;background-position:center;"></div><div class="m-nr">#004</div></div><div class="m-info"><div class="m-name">Tural Mammadov</div><div class="m-role">Member</div><div class="m-bike">BMW R nineT</div></div></div>
-    <div class="m-card"><div class="m-bar"></div><div class="m-av"><div class="m-av-bg" style="background-image:url('https://images.unsplash.com/photo-1685478566013-8459140e1edb?w=400&q=85');background-size:cover;background-position:center;"></div><div class="m-nr">#005</div></div><div class="m-info"><div class="m-name">Samir Aliyev</div><div class="m-role">Member</div><div class="m-bike">BMW G 310 GS</div></div></div>
-    <div class="m-card"><div class="m-bar"></div><div class="m-av"><div class="m-av-bg" style="background-image:url('https://images.unsplash.com/photo-1744395627539-bdeaf7929d64?w=400&q=85');background-size:cover;background-position:center;"></div><div class="m-nr">#006</div></div><div class="m-info"><div class="m-name">Fidan Ismayilova</div><div class="m-role">Member</div><div class="m-bike">BMW C 400 X</div></div></div>
-    <div class="m-card"><div class="m-bar"></div><div class="m-av"><div class="m-av-bg" style="background-image:url('https://images.unsplash.com/photo-1559568692-2124937b35c6?w=400&q=85');background-size:cover;background-position:center;"></div><div class="m-nr">#007</div></div><div class="m-info"><div class="m-name">Rashad Huseynov</div><div class="m-role">Member</div><div class="m-bike">BMW R 1250 RT</div></div></div>
+    <div class="m-card"><div class="m-bar"></div><div class="m-av"><div class="m-av-bg" style="background-image:url('https://images.unsplash.com/photo-1635073943212-f34dfbfcc3b0?w=400&q=85');background-size:cover;background-position:center;"></div><div class="m-nr">#001</div></div><div class="m-info"><div class="m-name">Elvin Hasanov</div><div class="m-role" data-en="Club President" data-az="Klub Prezidenti">Club President</div><div class="m-bike">BMW R 1250 GS Adventure</div></div></div>
+    <div class="m-card"><div class="m-bar"></div><div class="m-av"><div class="m-av-bg" style="background-image:url('https://images.unsplash.com/photo-1635073948138-df07998b9135?w=400&q=85');background-size:cover;background-position:center;"></div><div class="m-nr">#002</div></div><div class="m-info"><div class="m-name">Anar Rzayev</div><div class="m-role" data-en="Road Captain" data-az="Yol Kapitanı">Road Captain</div><div class="m-bike">BMW S 1000 RR</div></div></div>
+    <div class="m-card"><div class="m-bar"></div><div class="m-av"><div class="m-av-bg" style="background-image:url('https://images.unsplash.com/photo-1685478564483-3613fbe7acb0?w=400&q=85');background-size:cover;background-position:center;"></div><div class="m-nr">#003</div></div><div class="m-info"><div class="m-name">Nigar Karimova</div><div class="m-role" data-en="Events Lead" data-az="Tədbirlər Rəhbəri">Events Lead</div><div class="m-bike">BMW F 900 R</div></div></div>
+    <div class="m-card"><div class="m-bar"></div><div class="m-av"><div class="m-av-bg" style="background-image:url('https://images.unsplash.com/photo-1685478564488-6892188cb6b6?w=400&q=85');background-size:cover;background-position:center;"></div><div class="m-nr">#004</div></div><div class="m-info"><div class="m-name">Tural Mammadov</div><div class="m-role" data-en="Member" data-az="Üzv">Member</div><div class="m-bike">BMW R nineT</div></div></div>
+    <div class="m-card"><div class="m-bar"></div><div class="m-av"><div class="m-av-bg" style="background-image:url('https://images.unsplash.com/photo-1685478566013-8459140e1edb?w=400&q=85');background-size:cover;background-position:center;"></div><div class="m-nr">#005</div></div><div class="m-info"><div class="m-name">Samir Aliyev</div><div class="m-role" data-en="Member" data-az="Üzv">Member</div><div class="m-bike">BMW G 310 GS</div></div></div>
+    <div class="m-card"><div class="m-bar"></div><div class="m-av"><div class="m-av-bg" style="background-image:url('https://images.unsplash.com/photo-1744395627539-bdeaf7929d64?w=400&q=85');background-size:cover;background-position:center;"></div><div class="m-nr">#006</div></div><div class="m-info"><div class="m-name">Fidan Ismayilova</div><div class="m-role" data-en="Member" data-az="Üzv">Member</div><div class="m-bike">BMW C 400 X</div></div></div>
+    <div class="m-card"><div class="m-bar"></div><div class="m-av"><div class="m-av-bg" style="background-image:url('https://images.unsplash.com/photo-1559568692-2124937b35c6?w=400&q=85');background-size:cover;background-position:center;"></div><div class="m-nr">#007</div></div><div class="m-info"><div class="m-name">Rashad Huseynov</div><div class="m-role" data-en="Member" data-az="Üzv">Member</div><div class="m-bike">BMW R 1250 RT</div></div></div>
     <div class="m-card m-open" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
       <div class="m-open-plus">+</div>
-      <div class="m-open-t">Open Slot</div>
-      <div class="m-open-t" style="color:rgba(28,105,212,0.4);margin-top:2px;">Your BMW Here</div>
+      <div class="m-open-t" data-en="Open Slot" data-az="Açıq Yer">Open Slot</div>
+      <div class="m-open-t" style="color:rgba(28,105,212,0.4);margin-top:2px;" data-en="Your BMW Here" data-az="BMW-niz Burada">Your BMW Here</div>
     </div>
   </div>
 </section>
@@ -950,18 +984,18 @@ footer {
 <!-- ══ GALLERY ══ -->
 <section id="gallery">
   <div class="gallery-head">
-    <div><div class="s-eye">Ride Memories</div><h2 class="s-h">Gallery</h2></div>
+    <div><div class="s-eye" data-en="Ride Memories" data-az="Sürüş Xatirələri">Ride Memories</div><h2 class="s-h" data-en="Gallery" data-az="Qalereya">Gallery</h2></div>
   </div>
   <div class="g-mosaic">
-    <div class="g-item"><div class="g-bg" style="background-image:url('https://images.unsplash.com/photo-1635073891744-1e8a4e9cbe98?w=900&q=85');background-size:cover;background-position:center;"></div><div class="g-ov"><span class="g-cap">BMW S 1000 RR · Lahij 2024</span></div></div>
-    <div class="g-item"><div class="g-bg" style="background-image:url('https://images.unsplash.com/photo-1635073948138-df07998b9135?w=600&q=85');background-size:cover;background-position:center;"></div><div class="g-ov"><span class="g-cap">BMW M · Detail Shot</span></div></div>
-    <div class="g-item"><div class="g-bg" style="background-image:url('https://images.unsplash.com/photo-1685478564483-3613fbe7acb0?w=600&q=85');background-size:cover;background-position:center;"></div><div class="g-ov"><span class="g-cap">BMW Engine · Close-up</span></div></div>
-    <div class="g-item"><div class="g-bg" style="background-image:url('https://images.unsplash.com/photo-1685478564488-6892188cb6b6?w=600&q=85');background-size:cover;background-position:center;"></div><div class="g-ov"><span class="g-cap">BMW Roundel · Quba Ride</span></div></div>
-    <div class="g-item"><div class="g-bg" style="background-image:url('https://images.unsplash.com/photo-1559568692-2124937b35c6?w=600&q=85');background-size:cover;background-position:center;"></div><div class="g-ov"><span class="g-cap">BMW Night Ride · Baku</span></div></div>
+    <div class="g-item"><div class="g-bg" style="background-image:url('https://images.unsplash.com/photo-1635073891744-1e8a4e9cbe98?w=900&q=85');background-size:cover;background-position:center;"></div><div class="g-ov"><span class="g-cap" data-en="BMW S 1000 RR · Lahij 2024" data-az="BMW S 1000 RR · Lahıc 2024">BMW S 1000 RR · Lahij 2024</span></div></div>
+    <div class="g-item"><div class="g-bg" style="background-image:url('https://images.unsplash.com/photo-1635073948138-df07998b9135?w=600&q=85');background-size:cover;background-position:center;"></div><div class="g-ov"><span class="g-cap" data-en="BMW M · Detail Shot" data-az="BMW M · Detal Çəkiliş">BMW M · Detail Shot</span></div></div>
+    <div class="g-item"><div class="g-bg" style="background-image:url('https://images.unsplash.com/photo-1685478564483-3613fbe7acb0?w=600&q=85');background-size:cover;background-position:center;"></div><div class="g-ov"><span class="g-cap" data-en="BMW Engine · Close-up" data-az="BMW Mühərrik · Yaxından">BMW Engine · Close-up</span></div></div>
+    <div class="g-item"><div class="g-bg" style="background-image:url('https://images.unsplash.com/photo-1685478564488-6892188cb6b6?w=600&q=85');background-size:cover;background-position:center;"></div><div class="g-ov"><span class="g-cap" data-en="BMW Roundel · Quba Ride" data-az="BMW Rozetası · Quba Sürüşü">BMW Roundel · Quba Ride</span></div></div>
+    <div class="g-item"><div class="g-bg" style="background-image:url('https://images.unsplash.com/photo-1559568692-2124937b35c6?w=600&q=85');background-size:cover;background-position:center;"></div><div class="g-ov"><span class="g-cap" data-en="BMW Night Ride · Baku" data-az="BMW Gecə Sürüşü · Bakı">BMW Night Ride · Baku</span></div></div>
   </div>
   <div class="gallery-foot">
     <div class="gf-line"></div>
-    <a href="#contact" class="btn-outline">View All Photos</a>
+    <a href="#contact" class="btn-outline" data-en="View All Photos" data-az="Bütün Şəkilləri Gör">View All Photos</a>
     <div class="gf-line"></div>
   </div>
 </section>
@@ -969,27 +1003,27 @@ footer {
 <!-- ══ CONTACT ══ -->
 <section id="contact">
   <div class="ct-l">
-    <div class="s-eye">Get in Touch</div>
-    <h2 class="s-h">Join the Ride</h2>
-    <p class="s-p">Whether you're a seasoned BMW rider or just starting your journey, we'd love to hear from you. Tell us about yourself and your machine.</p>
+    <div class="s-eye" data-en="Get in Touch" data-az="Əlaqə Saxlayın">Get in Touch</div>
+    <h2 class="s-h" data-en="Join the Ride" data-az="Sürüşə Qoşulun">Join the Ride</h2>
+    <p class="s-p" data-en="Whether you're a seasoned BMW rider or just starting your journey, we'd love to hear from you. Tell us about yourself and your machine." data-az="İstər təcrübəli BMW sürücüsü olun, istərsə yolçuluğunuza yeni başlayın — sizdən eşitmək istərdik. Özünüz və maşınınız haqqında bizə danışın.">Whether you're a seasoned BMW rider or just starting your journey, we'd love to hear from you. Tell us about yourself and your machine.</p>
     <div class="cp-list">
-      <div class="cp"><div class="cp-ico">📍</div><div><div class="cp-lbl">Base</div><div class="cp-val">Baku, Azerbaijan</div></div></div>
+      <div class="cp"><div class="cp-ico">📍</div><div><div class="cp-lbl" data-en="Base" data-az="Ərazi">Base</div><div class="cp-val" data-en="Baku, Azerbaijan" data-az="Bakı, Azərbaycan">Baku, Azerbaijan</div></div></div>
       <div class="cp"><div class="cp-ico">✉</div><div><div class="cp-lbl">Email</div><div class="cp-val">info@bmwmotorrad.az</div></div></div>
-      <div class="cp"><div class="cp-ico">💬</div><div><div class="cp-lbl">WhatsApp</div><div class="cp-val">Available on request</div></div></div>
+      <div class="cp"><div class="cp-ico">💬</div><div><div class="cp-lbl">WhatsApp</div><div class="cp-val" data-en="Available on request" data-az="Müraciət üzrə mövcuddur">Available on request</div></div></div>
       <div class="cp"><div class="cp-ico">📷</div><div><div class="cp-lbl">Instagram</div><div class="cp-val">@bmwmotorrad.az</div></div></div>
     </div>
   </div>
   <div class="ct-r">
-    <div class="s-eye" style="margin-bottom:28px;">Membership Enquiry</div>
+    <div class="s-eye" style="margin-bottom:28px;" data-en="Membership Enquiry" data-az="Üzvlük Sorğusu">Membership Enquiry</div>
     <form class="cf" onsubmit="handleSubmit(event)">
       <div class="cf-row">
-        <div class="cf-g"><label class="cf-lbl">Full Name</label><input class="cf-in" type="text" placeholder="Your name" required/></div>
+        <div class="cf-g"><label class="cf-lbl" data-en="Full Name" data-az="Ad Soyad">Full Name</label><input class="cf-in" type="text" data-placeholder-en="Your name" data-placeholder-az="Adınız" placeholder="Your name" required/></div>
         <div class="cf-g"><label class="cf-lbl">Email</label><input class="cf-in" type="email" placeholder="your@email.com" required/></div>
       </div>
-      <div class="cf-g"><label class="cf-lbl">Your BMW Model</label><input class="cf-in" type="text" placeholder="e.g. BMW R 1250 GS Adventure"/></div>
-      <div class="cf-g"><label class="cf-lbl">Riding Experience</label><input class="cf-in" type="text" placeholder="e.g. 5 years"/></div>
-      <div class="cf-g"><label class="cf-lbl">Message</label><textarea class="cf-ta" placeholder="Tell us about yourself..."></textarea></div>
-      <button type="submit" class="cf-sub">Send Application →</button>
+      <div class="cf-g"><label class="cf-lbl" data-en="Your BMW Model" data-az="BMW Modeliniz">Your BMW Model</label><input class="cf-in" type="text" data-placeholder-en="e.g. BMW R 1250 GS Adventure" data-placeholder-az="məs. BMW R 1250 GS Adventure" placeholder="e.g. BMW R 1250 GS Adventure"/></div>
+      <div class="cf-g"><label class="cf-lbl" data-en="Riding Experience" data-az="Sürüş Təcrübəsi">Riding Experience</label><input class="cf-in" type="text" data-placeholder-en="e.g. 5 years" data-placeholder-az="məs. 5 il" placeholder="e.g. 5 years"/></div>
+      <div class="cf-g"><label class="cf-lbl" data-en="Message" data-az="Mesaj">Message</label><textarea class="cf-ta" data-placeholder-en="Tell us about yourself..." data-placeholder-az="Özünüz haqqında danışın..." placeholder="Tell us about yourself..."></textarea></div>
+      <button type="submit" class="cf-sub" data-en="Send Application →" data-az="Müraciəti Göndər →">Send Application →</button>
     </form>
   </div>
 </section>
@@ -1005,16 +1039,16 @@ footer {
       <span class="ft-name">BMW Motorrad Club Azerbaijan</span>
     </div>
     <ul class="ft-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#events">Events</a></li>
-      <li><a href="#members">Members</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about" data-en="About" data-az="Haqqımızda">About</a></li>
+      <li><a href="#events" data-en="Events" data-az="Tədbirlər">Events</a></li>
+      <li><a href="#members" data-en="Members" data-az="Üzvlər">Members</a></li>
+      <li><a href="#gallery" data-en="Gallery" data-az="Qalereya">Gallery</a></li>
+      <li><a href="#contact" data-en="Contact" data-az="Əlaqə">Contact</a></li>
     </ul>
   </div>
   <div class="fb">
-    <span class="fb-copy">© 2025 BMW Motorrad Club Azerbaijan · Fan club — not affiliated with BMW AG.</span>
-    <span class="fb-flag">🇦🇿 Baku</span>
+    <span class="fb-copy" data-en="© 2025 BMW Motorrad Club Azerbaijan · Fan club — not affiliated with BMW AG." data-az="© 2025 BMW Motorrad Klubu Azərbaycan · Fan klubu — BMW AG ilə əlaqəli deyil.">© 2025 BMW Motorrad Club Azerbaijan · Fan club — not affiliated with BMW AG.</span>
+    <span class="fb-flag">🇦🇿 Bakı</span>
   </div>
 </footer>
 
@@ -1119,12 +1153,48 @@ function updateNav() {
 window.addEventListener('scroll', updateNav, { passive: true });
 updateNav();
 
-/* ══ Contact form ══ */
+/* ══ i18n Language Switcher ══ */
+let currentLang = localStorage.getItem('bmwaz-lang') || 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('bmwaz-lang', lang);
+
+  // Update html lang attribute
+  document.getElementById('html-root').setAttribute('lang', lang);
+
+  // Toggle button active states
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-az').classList.toggle('active', lang === 'az');
+
+  // Update all elements with data-en / data-az
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (!val) return;
+    // For elements with innerHTML (br tags etc)
+    if (val.includes('<')) {
+      el.innerHTML = val;
+    } else {
+      el.textContent = val;
+    }
+  });
+
+  // Update placeholder attributes
+  document.querySelectorAll('[data-placeholder-en]').forEach(el => {
+    const val = el.getAttribute('data-placeholder-' + lang);
+    if (val) el.setAttribute('placeholder', val);
+  });
+
+  // MENU button handled by data-en/data-az span
+}
+
+// Apply saved language on load
+setLang(currentLang);
 function handleSubmit(e) {
   e.preventDefault();
   const btn = e.target.querySelector('.cf-sub');
-  const orig = btn.textContent;
-  btn.textContent = 'Application Sent ✓';
+  const orig = btn.getAttribute('data-' + currentLang) || btn.textContent;
+  btn.textContent = currentLang === 'az' ? 'Müraciət Göndərildi ✓' : 'Application Sent ✓';
   btn.style.background = '#0E4FA8';
   setTimeout(() => { btn.textContent = orig; btn.style.background = ''; e.target.reset(); }, 3500);
 }
