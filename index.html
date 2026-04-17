@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BMW Motorrad Club Azerbaijan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet"/>
+<style>
+/* ══════════════════════════════════════════════════════
+   BMW MOTORRAD CLUB AZ — v3
+   Lighter palette (mid-grey base, not pitch black)
+   + Full BMW-style cinematic hero slider
+══════════════════════════════════════════════════════ */
+:root {
+  /* ── Lighter palette ── */
+  --page-bg:    #F5F5F3;     /* warm off-white page */
+  --surface-1:  #FFFFFF;
+  --surface-2:  #EEEEEB;
+  --surface-3:  #D6D6D2;
+  --dark-bg:    #252525;     /* slightly lighter dark */
+  --dark-card:  #303030;
+  --dark-panel: #2C2C2C;
+
+  --bmw-blue:   #1C69D4;
+  --bmw-blue-d: #0E4FA8;
+  --bmw-blue-l: #4A8EE0;
+
+  --text-h:     #111111;     /* headings */
+  --text-b:     #3A3A3A;     /* body */
+  --text-m:     #7A7A7A;     /* muted */
+  --text-inv:   #FFFFFF;     /* on dark */
+  --text-inv-m: rgba(255,255,255,0.55);
+
+  --ff-d: 'Barlow Condensed', sans-serif;
+  --ff-b: 'Barlow', sans-serif;
+  --ease: cubic-bezier(.4,0,.2,1);
+  --tr:   .28s var(--ease);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--ff-b);
+  background: var(--page-bg);
+  color: var(--text-b);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ══════════════════════════════════════════════════════
+   NAV  — logo+wordmark LEFT | links CENTER | join RIGHT
+══════════════════════════════════════════════════════ */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  height: 64px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 36px;
+  transition: background var(--tr), border-color var(--tr);
+}
+#nav.on-light {
+  background: rgba(255,255,255,0.97);
+  border-bottom: 1px solid var(--surface-3);
+  backdrop-filter: blur(10px);
+}
+#nav.on-dark {
+  background: transparent;
+  border-bottom: 1px solid transparent;
+}
+
+/* LEFT: roundel + wordmark + divider + menu */
+.nav-brand {
+  display: flex; align-items: center; gap: 0;
+}
+.nav-roundel-wrap {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; cursor: pointer; flex-shrink: 0;
+}
+
+/* Roundel — pure CSS BMW */
+.roundel {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  position: relative; overflow: hidden; flex-shrink: 0;
+  transition: border-color var(--tr);
+}
+#nav.on-light .roundel { border-color: rgba(0,0,0,0.18); }
+.roundel-q {
+  position: absolute; inset: 0;
+  display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+}
+.rq-tl { background: #fff; }
+.rq-tr { background: var(--bmw-blue); }
+.rq-bl { background: var(--bmw-blue); }
+.rq-br { background: #fff; }
+.roundel-ring {
+  position: absolute; inset: 20%; border-radius: 50%;
+  border: 1.5px solid rgba(0,0,0,0.10);
+  background: rgba(235,235,235,0.92);
+}
+
+.nav-wordmark {
+  font-family: var(--ff-d); font-size: 14px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: white; transition: color var(--tr); white-space: nowrap;
+}
+#nav.on-light .nav-wordmark { color: var(--text-h); }
+
+.nav-divider {
+  width: 1px; height: 22px; background: rgba(255,255,255,0.2);
+  margin: 0 18px; flex-shrink: 0; transition: background var(--tr);
+}
+#nav.on-light .nav-divider { background: var(--surface-3); }
+
+.nav-menu-btn {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--ff-d); font-size: 12px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.7); cursor: pointer; user-select: none;
+  background: none; border: none; transition: color var(--tr); flex-shrink: 0;
+}
+#nav.on-light .nav-menu-btn { color: var(--text-m); }
+.nav-menu-btn:hover { color: white; }
+#nav.on-light .nav-menu-btn:hover { color: var(--text-h); }
+.ham { display: flex; flex-direction: column; gap: 5px; }
+.ham span { display: block; width: 18px; height: 1.5px; background: currentColor; }
+
+/* CENTER: nav links */
+.nav-links {
+  display: flex; gap: 28px; list-style: none; justify-content: center;
+}
+.nav-links a {
+  font-family: var(--ff-d); font-size: 12px; font-weight: 600;
+  letter-spacing: 1.8px; text-transform: uppercase;
+  color: rgba(255,255,255,0.72); text-decoration: none;
+  transition: color var(--tr);
+}
+#nav.on-light .nav-links a { color: var(--text-m); }
+.nav-links a:hover { color: white !important; }
+#nav.on-light .nav-links a:hover { color: var(--text-h) !important; }
+
+/* RIGHT: join button */
+.nav-right-col {
+  display: flex; justify-content: flex-end;
+}
+.nav-join {
+  font-family: var(--ff-d); font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: white; background: var(--bmw-blue);
+  border: none; padding: 9px 22px; cursor: pointer;
+  text-decoration: none; display: inline-block;
+  transition: background var(--tr);
+}
+.nav-join:hover { background: var(--bmw-blue-d); }
+
+/* ══════════════════════════════════════════════════════
+   HERO SLIDER  — exact BMW Motorrad style
+══════════════════════════════════════════════════════ */
+#slider {
+  position: relative; width: 100%; height: 100vh; min-height: 580px;
+  overflow: hidden; background: var(--dark-bg);
+  user-select: none;
+}
+
+/* ── Slides ── */
+.slide {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 0 6% 9%;
+  opacity: 0; transition: opacity .7s var(--ease);
+  pointer-events: none;
+}
+.slide.active { opacity: 1; pointer-events: auto; }
+
+.slide-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  transform: scale(1.04);
+  transition: transform 6s var(--ease);
+}
+.slide.active .slide-bg { transform: scale(1); }
+
+/* Gradient overlay — exactly like BMW's */
+.slide-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.62) 0%,
+    rgba(0,0,0,0.3) 40%,
+    rgba(0,0,0,0.05) 70%,
+    transparent 100%
+  );
+}
+.slide-overlay-b {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 40%);
+}
+
+.slide-content { position: relative; z-index: 2; }
+.slide-eyebrow {
+  font-family: var(--ff-d); font-size: 11px; font-weight: 700;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--bmw-blue); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.slide-eyebrow::before {
+  content: ''; width: 24px; height: 1px; background: var(--bmw-blue);
+}
+.slide-title {
+  font-family: var(--ff-d); font-size: clamp(44px, 7vw, 88px);
+  font-weight: 700; line-height: 0.9; letter-spacing: -1px;
+  text-transform: uppercase; color: white;
+  margin-bottom: 12px;
+}
+.slide-sub {
+  font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.65);
+  margin-bottom: 32px; max-width: 400px; line-height: 1.65;
+}
+/* BMW-style button — white border, no fill */
+.slide-btn {
+  display: inline-block;
+  font-family: var(--ff-d); font-size: 12px; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: white; background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.8);
+  padding: 12px 32px; cursor: pointer;
+  text-decoration: none;
+  transition: background var(--tr), border-color var(--tr);
+}
+.slide-btn:hover { background: rgba(255,255,255,0.1); border-color: white; }
+
+/* Slide backgrounds — confirmed BMW Motorrad photos */
+.bg-s1 {
+  background-image: url('https://images.unsplash.com/photo-1635073908681-b4dfbd6015e8?w=1600&q=85');
+  background-size: cover; background-position: center 50%;
+}
+.bg-s2 {
+  background-image: url('https://images.unsplash.com/photo-1677166270367-0687b04b7146?w=1600&q=85');
+  background-size: cover; background-position: center 45%;
+}
+.bg-s3 {
+  background-image: url('https://images.unsplash.com/photo-1531327431456-837da4b1d562?w=1600&q=85');
+  background-size: cover; background-position: center 50%;
+}
+
+/* Abstract bike silhouette shapes in CSS (when no photo) */
+.bike-shape {
+  position: absolute; right: 8%; bottom: 12%; z-index: 1;
+  width: 55%; max-width: 720px; height: 65%;
+  pointer-events: none;
+}
+.bs-body { position: absolute; bottom: 0; left: 10%; right: 5%; height: 55%;
+  border-radius: 40% 50% 20% 30%; background: rgba(255,255,255,0.04); }
+.bs-wheel-f { position: absolute; right: 0; bottom: 0;
+  width: 38%; aspect-ratio: 1; border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.07); }
+.bs-wheel-r { position: absolute; left: 8%; bottom: 0;
+  width: 38%; aspect-ratio: 1; border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.07); }
+.bs-glow { position: absolute; bottom: 10%; right: 20%;
+  width: 60%; height: 50%;
+  background: radial-gradient(ellipse at center,
+    rgba(28,105,212,0.14) 0%, transparent 65%); }
+
+/* ── Progress bar ── (bottom edge, exactly BMW) */
+#slider-progress-track {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 20;
+  height: 3px; background: rgba(255,255,255,0.15);
+}
+#slider-progress-bar {
+  height: 100%; background: white; width: 0%;
+  transition: width linear;
+}
+
+/* ── Counter + Arrows ── (bottom-left, BMW style) */
+.slider-counter {
+  position: absolute; bottom: 22px; left: 5%; z-index: 20;
+  display: flex; align-items: center; gap: 0;
+}
+.sl-arr {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.2);
+  color: white; font-size: 16px; cursor: pointer;
+  transition: background var(--tr), border-color var(--tr);
+  line-height: 1; padding-bottom: 1px;
+}
+.sl-arr:hover { background: rgba(0,0,0,0.75); border-color: rgba(255,255,255,0.6); }
+.sl-num {
+  font-family: var(--ff-d); font-size: 13px; font-weight: 700;
+  letter-spacing: 1px; color: white;
+  background: rgba(0,0,0,0.45); padding: 0 14px; height: 36px;
+  display: flex; align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+/* ── Play/Pause ── (bottom-right, BMW style) */
+.slider-pause {
+  position: absolute; bottom: 22px; right: 3%; z-index: 20;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.4);
+  background: rgba(0,0,0,0.4);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 11px; color: white;
+  transition: border-color var(--tr), background var(--tr);
+}
+.slider-pause:hover { border-color: white; background: rgba(0,0,0,0.7); }
+
+/* ── Dot indicators ── */
+.slider-dots {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  z-index: 20; display: flex; gap: 8px;
+}
+.s-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.3); cursor: pointer;
+  transition: background var(--tr), transform var(--tr);
+}
+.s-dot.active { background: white; transform: scale(1.3); }
+
+/* ══════════════════════════════════════════════════════
+   QUICK-NAV BAR
+══════════════════════════════════════════════════════ */
+#quicknav {
+  background: var(--surface-1);
+  border-bottom: 1px solid var(--surface-3);
+  display: flex; align-items: stretch; overflow-x: auto;
+  scrollbar-width: none;
+}
+#quicknav::-webkit-scrollbar { display: none; }
+.qn-item {
+  display: flex; align-items: center; gap: 9px;
+  padding: 17px 28px;
+  font-family: var(--ff-d); font-size: 12px; font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--text-m); cursor: pointer; white-space: nowrap;
+  border-right: 1px solid var(--surface-3);
+  transition: color var(--tr), background var(--tr);
+  text-decoration: none;
+}
+.qn-item:hover { color: var(--text-h); background: var(--surface-2); }
+.qn-icon { font-size: 15px; }
+
+/* ══════════════════════════════════════════════════════
+   SHARED SECTION ATOMS
+══════════════════════════════════════════════════════ */
+.s-eye {
+  font-family: var(--ff-d); font-size: 11px; font-weight: 700;
+  letter-spacing: 4px; text-transform: uppercase; color: var(--bmw-blue);
+  display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+}
+.s-eye::before { content: ''; width: 24px; height: 1px; background: var(--bmw-blue); }
+
+.s-h {
+  font-family: var(--ff-d); font-size: clamp(36px,4.5vw,56px);
+  font-weight: 700; line-height: 0.95; letter-spacing: -0.5px;
+  text-transform: uppercase; color: var(--text-h);
+}
+.s-h.inv { color: white; }
+.s-p {
+  font-size: 15px; font-weight: 300; line-height: 1.8; color: var(--text-m);
+}
+.s-p.inv { color: var(--text-inv-m); }
+
+.btn-primary {
+  display: inline-block;
+  font-family: var(--ff-d); font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: white; background: var(--bmw-blue);
+  border: none; padding: 11px 28px; cursor: pointer;
+  text-decoration: none; transition: background var(--tr);
+}
+.btn-primary:hover { background: var(--bmw-blue-d); }
+
+.btn-outline {
+  display: inline-block;
+  font-family: var(--ff-d); font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text-h); background: transparent;
+  border: 1.5px solid var(--surface-3); padding: 11px 28px; cursor: pointer;
+  text-decoration: none; transition: border-color var(--tr), color var(--tr);
+}
+.btn-outline:hover { border-color: var(--text-h); }
+
+.btn-outline-inv {
+  display: inline-block;
+  font-family: var(--ff-d); font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: white; background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.45); padding: 11px 28px; cursor: pointer;
+  text-decoration: none; transition: border-color var(--tr), background var(--tr);
+}
+.btn-outline-inv:hover { border-color: white; background: rgba(255,255,255,0.07); }
+
+/* ══════════════════════════════════════════════════════
+   ABOUT — light left / dark right
+══════════════════════════════════════════════════════ */
+#about { display: grid; grid-template-columns: 1fr 1fr; min-height: 72vh; }
+
+.about-l {
+  background: var(--surface-1);
+  padding: 80px 7% 80px 6%;
+  display: flex; flex-direction: column; justify-content: center;
+  border-right: 1px solid var(--surface-3);
+}
+.about-l .s-p { margin-top: 18px; max-width: 440px; }
+
+.about-pillars {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  margin-top: 44px; border-top: 1px solid var(--surface-3);
+  padding-top: 28px;
+}
+.pillar { padding: 0 0 0 16px; border-left: 2px solid var(--bmw-blue); margin-bottom: 24px; }
+.pillar:nth-child(odd) { margin-right: 20px; }
+.pt { font-family: var(--ff-d); font-size: 13px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-h); margin-bottom: 4px; }
+.pd { font-size: 13px; font-weight: 300; color: var(--text-m); line-height: 1.55; }
+
+.about-r {
+  background: var(--dark-bg);
+  position: relative; overflow: hidden; min-height: 440px;
+  display: flex; align-items: center; justify-content: center;
+}
+.about-r-bg {
+  position: absolute; inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1516379527711-be1d17ccf71e?w=900&q=85');
+  background-size: cover; background-position: center;
+  filter: brightness(0.38) saturate(0.85);
+}
+.about-big-text {
+  font-family: var(--ff-d); font-size: 110px; font-weight: 800;
+  color: rgba(28,105,212,0.1); line-height: 0.85; text-align: center;
+  text-transform: uppercase; letter-spacing: -4px; user-select: none;
+  position: relative; z-index: 1;
+}
+.about-badge {
+  position: absolute; bottom: 28px; left: 28px;
+  background: var(--bmw-blue); color: white;
+  font-family: var(--ff-d); font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 10px 16px; z-index: 2;
+}
+.about-yr {
+  position: absolute; top: 24px; right: 24px;
+  font-family: var(--ff-d); font-size: 72px; font-weight: 800;
+  color: rgba(255,255,255,0.04); user-select: none; line-height: 1;
+}
+
+/* ══════════════════════════════════════════════════════
+   EVENTS — light background
+══════════════════════════════════════════════════════ */
+#events { background: var(--surface-2); padding: 80px 5%; }
+
+.section-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.ev-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+
+.ev-card {
+  background: var(--surface-1);
+  border: 1px solid var(--surface-3);
+  overflow: hidden; cursor: pointer;
+  transition: transform var(--tr), box-shadow var(--tr);
+}
+.ev-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+
+.ev-img {
+  aspect-ratio: 16/9; position: relative; overflow: hidden;
+}
+.ev-img-inner {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+}
+.ei-1 { background: linear-gradient(135deg,#0b1e42,#163a7a); }
+.ei-2 { background: linear-gradient(135deg,#08102a,#0c2060); }
+.ei-3 { background: linear-gradient(135deg,#0a1830,#143070); }
+.ei-lbl {
+  font-family: var(--ff-d); font-size: 48px; font-weight: 800;
+  color: rgba(28,105,212,0.2); letter-spacing: -1px; text-align: center;
+  line-height: 1; text-transform: uppercase;
+}
+.ev-img-hov {
+  position: absolute; inset: 0;
+  background: rgba(28,105,212,0); transition: background var(--tr);
+}
+.ev-card:hover .ev-img-hov { background: rgba(28,105,212,0.2); }
+
+.ev-body { padding: 20px 22px 24px; }
+.ev-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.ev-date {
+  font-family: var(--ff-d); font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--bmw-blue);
+}
+.ev-tag {
+  font-family: var(--ff-d); font-size: 10px; font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-m);
+  border: 1px solid var(--surface-3); padding: 2px 8px;
+}
+.ev-title {
+  font-family: var(--ff-d); font-size: 22px; font-weight: 700;
+  letter-spacing: 0.3px; text-transform: uppercase;
+  color: var(--text-h); line-height: 1.05; margin-bottom: 8px;
+}
+.ev-loc { font-size: 12px; font-weight: 300; color: var(--text-m); }
+.ev-loc::before { content: '→ '; color: var(--bmw-blue); }
+.ev-more {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 16px;
+  font-family: var(--ff-d); font-size: 11px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase; color: var(--bmw-blue);
+  border-bottom: 1px solid transparent; padding-bottom: 1px;
+  transition: border-color var(--tr); cursor: pointer;
+}
+.ev-more:hover { border-color: var(--bmw-blue); }
+.ev-more::after { content: '›'; font-size: 15px; }
+
+/* ══════════════════════════════════════════════════════
+   MEMBERS — medium dark
+══════════════════════════════════════════════════════ */
+#members { background: var(--dark-panel); padding: 80px 5%; }
+.members-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; margin-top: 44px; }
+
+.m-card {
+  background: var(--dark-card); overflow: hidden; cursor: pointer;
+  transition: transform var(--tr);
+  position: relative;
+}
+.m-card:hover { transform: translateY(-3px); }
+.m-bar {
+  height: 2px; background: var(--bmw-blue); width: 0;
+  transition: width .35s var(--ease);
+}
+.m-card:hover .m-bar { width: 100%; }
+
+.m-av {
+  aspect-ratio: 1; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.m-av-bg {
+  position: absolute; inset: 0;
+  background-color: #1a2a45;
+}
+/* subtle dark overlay so the number badge stays readable */
+.m-av::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.05) 60%);
+  pointer-events: none;
+}
+.m-nr {
+  position: absolute; top: 9px; left: 11px; z-index: 2;
+  font-family: var(--ff-d); font-size: 10px; font-weight: 700;
+  letter-spacing: 1.5px; color: rgba(255,255,255,0.55);
+}
+.m-info { padding: 14px 15px 18px; }
+.m-name {
+  font-family: var(--ff-d); font-size: 16px; font-weight: 700;
+  letter-spacing: 0.5px; text-transform: uppercase; color: white;
+  margin-bottom: 2px;
+}
+.m-role {
+  font-family: var(--ff-d); font-size: 10px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--bmw-blue);
+  margin-bottom: 5px;
+}
+.m-bike { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.3); }
+
+.m-open {
+  border: 1.5px dashed rgba(28,105,212,0.22);
+  background: rgba(28,105,212,0.03);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 6px; cursor: pointer; min-height: 220px;
+  transition: border-color var(--tr), background var(--tr);
+}
+.m-open:hover { border-color: rgba(28,105,212,0.5); background: rgba(28,105,212,0.06); }
+.m-open-plus { font-size: 30px; color: rgba(28,105,212,0.35); font-weight: 100; line-height: 1; }
+.m-open-t {
+  font-family: var(--ff-d); font-size: 10px; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.2);
+}
+
+/* ══════════════════════════════════════════════════════
+   GALLERY — light
+══════════════════════════════════════════════════════ */
+#gallery { background: var(--surface-1); padding: 80px 5% 0; }
+
+.gallery-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 24px; }
+
+.g-mosaic {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 300px 200px;
+  gap: 4px;
+}
+.g-item { overflow: hidden; position: relative; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.g-item:first-child { grid-row: 1 / 3; }
+.g-bg { position: absolute; inset: 0; transition: transform .5s var(--ease); }
+.g-item:hover .g-bg { transform: scale(1.04); }
+.gb-1 { background: linear-gradient(135deg,#061422,#0e2a62,#163d80); }
+.gb-2 { background: linear-gradient(135deg,#09182e,#122d66); }
+.gb-3 { background: linear-gradient(160deg,#050d1e,#0c2050); }
+.gb-4 { background: linear-gradient(135deg,#0a1525,#153572); }
+.gb-5 { background: linear-gradient(160deg,#080f1a,#102860); }
+.g-lbl {
+  position: relative; z-index: 1;
+  font-family: var(--ff-d); font-size: 38px; font-weight: 800;
+  color: rgba(28,105,212,0.18); text-transform: uppercase; text-align: center; line-height: 1;
+}
+.g-item:first-child .g-lbl { font-size: 72px; }
+.g-ov {
+  position: absolute; inset: 0; z-index: 2;
+  background: rgba(0,0,0,0); transition: background var(--tr);
+  display: flex; align-items: flex-end; padding: 16px;
+}
+.g-item:hover .g-ov { background: rgba(28,105,212,0.28); }
+.g-cap {
+  font-family: var(--ff-d); font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: transparent; transition: color var(--tr);
+}
+.g-item:hover .g-cap { color: white; }
+.gallery-foot { padding: 24px 0 80px; display: flex; align-items: center; gap: 20px; }
+.gf-line { flex: 1; height: 1px; background: var(--surface-3); }
+
+/* ══════════════════════════════════════════════════════
+   CONTACT — medium light
+══════════════════════════════════════════════════════ */
+#contact { display: grid; grid-template-columns: 1fr 1fr; background: var(--surface-2); }
+
+.ct-l {
+  padding: 80px 7% 80px 6%;
+  background: var(--surface-1);
+  border-right: 1px solid var(--surface-3);
+}
+.ct-l .s-p { margin-top: 18px; margin-bottom: 44px; max-width: 400px; }
+
+.cp-list { display: flex; flex-direction: column; gap: 20px; }
+.cp { display: flex; align-items: flex-start; gap: 14px; }
+.cp-ico {
+  width: 38px; height: 38px; flex-shrink: 0;
+  border: 1px solid var(--surface-3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: var(--bmw-blue);
+}
+.cp-lbl { font-family: var(--ff-d); font-size: 10px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--text-m); margin-bottom: 2px; }
+.cp-val { font-size: 14px; font-weight: 400; color: var(--text-b); }
+
+.ct-r { padding: 80px 6%; }
+.cf { display: flex; flex-direction: column; gap: 16px; }
+.cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.cf-g { display: flex; flex-direction: column; gap: 5px; }
+.cf-lbl { font-family: var(--ff-d); font-size: 10px; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase; color: var(--text-m); }
+.cf-in, .cf-ta {
+  background: var(--surface-1); border: 1px solid var(--surface-3);
+  padding: 11px 13px; color: var(--text-b);
+  font-family: var(--ff-b); font-size: 14px; font-weight: 300;
+  outline: none; transition: border-color var(--tr); border-radius: 0;
+}
+.cf-in:focus, .cf-ta:focus { border-color: var(--bmw-blue); }
+.cf-in::placeholder, .cf-ta::placeholder { color: var(--surface-3); }
+.cf-ta { min-height: 110px; resize: vertical; }
+.cf-sub {
+  font-family: var(--ff-d); font-size: 11px; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: white; background: var(--bmw-blue);
+  border: none; padding: 13px 32px; cursor: pointer;
+  align-self: flex-start; transition: background var(--tr);
+}
+.cf-sub:hover { background: var(--bmw-blue-d); }
+
+/* ══════════════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════════════ */
+footer {
+  background: var(--text-h);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.ft {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 26px 5%;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.ft-brand { display: flex; align-items: center; gap: 12px; }
+.ft-r-sm {
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+  overflow: hidden; position: relative; flex-shrink: 0;
+}
+.ft-r-sm-q { position: absolute; inset: 0; display: grid;
+  grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+.ft-rq-tl { background: white; }
+.ft-rq-tr { background: var(--bmw-blue); }
+.ft-rq-bl { background: var(--bmw-blue); }
+.ft-rq-br { background: white; }
+.ft-r-sm-ring { position: absolute; inset: 22%; border-radius: 50%;
+  border: 1.5px solid rgba(0,0,0,0.1);
+  background: rgba(30,30,30,0.6); }
+.ft-name { font-family: var(--ff-d); font-size: 14px; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+.ft-links { display: flex; gap: 24px; list-style: none; }
+.ft-links a { font-family: var(--ff-d); font-size: 10px; font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.3);
+  text-decoration: none; transition: color var(--tr); }
+.ft-links a:hover { color: rgba(255,255,255,0.7); }
+.fb { padding: 14px 5%; display: flex; justify-content: space-between; }
+.fb-copy { font-size: 11px; color: rgba(255,255,255,0.18); font-weight: 300; }
+.fb-flag { font-size: 12px; color: rgba(255,255,255,0.18); font-family: var(--ff-d); letter-spacing: 1.5px; }
+
+/* ══════════════════════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(22px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+.slide-content > * { opacity: 0; }
+.slide.active .slide-eyebrow { animation: fadeUp .55s ease forwards .15s; }
+.slide.active .slide-title   { animation: fadeUp .55s ease forwards .28s; }
+.slide.active .slide-sub     { animation: fadeUp .55s ease forwards .42s; }
+.slide.active .slide-btn     { animation: fadeUp .55s ease forwards .55s; }
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════════ */
+@media (max-width: 960px) {
+  #about { grid-template-columns: 1fr; }
+  .about-r { min-height: 260px; }
+  #contact { grid-template-columns: 1fr; }
+  .members-grid { grid-template-columns: repeat(2,1fr); }
+  .ev-grid { grid-template-columns: 1fr; gap: 12px; }
+  .g-mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: 220px 180px 180px; }
+  .g-item:first-child { grid-row: 1; grid-column: 1/3; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav id="nav" class="on-dark">
+  <!-- LEFT: roundel + wordmark + divider + menu -->
+  <div class="nav-brand">
+    <div class="nav-roundel-wrap">
+      <div class="roundel">
+        <div class="roundel-q">
+          <div class="rq-tl"></div><div class="rq-tr"></div>
+          <div class="rq-bl"></div><div class="rq-br"></div>
+        </div>
+        <div class="roundel-ring"></div>
+      </div>
+      <span class="nav-wordmark">BMW Motorrad AZ</span>
+    </div>
+    <div class="nav-divider"></div>
+    <button class="nav-menu-btn" aria-label="Menu">
+      <span class="ham"><span></span><span></span><span></span></span>
+      MENU
+    </button>
+  </div>
+
+  <!-- CENTER: nav links -->
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#members">Members</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+  </ul>
+
+  <!-- RIGHT: join -->
+  <div class="nav-right-col">
+    <a href="#contact" class="nav-join">Join the Club</a>
+  </div>
+</nav>
+
+<!-- ══ HERO SLIDER ══ -->
+<div id="slider">
+
+  <!-- SLIDE 1 -->
+  <div class="slide active" id="slide-0">
+    <div class="slide-bg bg-s1"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-overlay-b"></div>
+    <div class="bike-shape">
+      <div class="bs-glow"></div>
+      <div class="bs-body"></div>
+      <div class="bs-wheel-f"></div>
+      <div class="bs-wheel-r"></div>
+    </div>
+    <div class="slide-content">
+      <div class="slide-eyebrow">BMW Motorrad Club Azerbaijan</div>
+      <h1 class="slide-title">RIDE<br/>TOGETHER</h1>
+      <p class="slide-sub">A brotherhood of passionate riders exploring the roads and mountains of Azerbaijan on BMW motorcycles.</p>
+      <a href="#about" class="slide-btn">Discover the Club</a>
+    </div>
+  </div>
+
+  <!-- SLIDE 2 -->
+  <div class="slide" id="slide-1">
+    <div class="slide-bg bg-s2"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-overlay-b"></div>
+    <div class="slide-content">
+      <div class="slide-eyebrow">Club Calendar · 2025</div>
+      <h1 class="slide-title">LAHIJ<br/>PASS RIDE</h1>
+      <p class="slide-sub">Join us on 14 June for a spectacular mountain ride through the ancient village of Lahij and the Ismayilli highlands.</p>
+      <a href="#events" class="slide-btn">View Events</a>
+    </div>
+  </div>
+
+  <!-- SLIDE 3 -->
+  <div class="slide" id="slide-2">
+    <div class="slide-bg bg-s3"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-overlay-b"></div>
+    <div class="slide-content">
+      <div class="slide-eyebrow">Open Membership · 2025</div>
+      <h1 class="slide-title">YOUR<br/>SEAT<br/>AWAITS</h1>
+      <p class="slide-sub">We have one open seat for an exceptional BMW rider. Be part of the club that defines motorcycle culture in Azerbaijan.</p>
+      <a href="#contact" class="slide-btn">Apply to Join</a>
+    </div>
+  </div>
+
+  <!-- Progress bar -->
+  <div id="slider-progress-track">
+    <div id="slider-progress-bar"></div>
+  </div>
+
+  <!-- Counter + Arrows (BMW style) -->
+  <div class="slider-counter">
+    <button class="sl-arr" id="sl-prev" aria-label="Previous">‹</button>
+    <div class="sl-num" id="sl-num">1 / 3</div>
+    <button class="sl-arr" id="sl-next" aria-label="Next">›</button>
+  </div>
+
+  <!-- Dots -->
+  <div class="slider-dots">
+    <div class="s-dot active" data-i="0"></div>
+    <div class="s-dot" data-i="1"></div>
+    <div class="s-dot" data-i="2"></div>
+  </div>
+
+  <!-- Play/Pause (BMW style circle) -->
+  <button class="slider-pause" id="sl-pause" aria-label="Pause/Play">⏸</button>
+</div>
+
+<!-- ══ QUICKNAV ══ -->
+<div id="quicknav">
+  <a href="#about" class="qn-item"><span class="qn-icon">◈</span> About the Club</a>
+  <a href="#events" class="qn-item"><span class="qn-icon">◷</span> Upcoming Rides</a>
+  <a href="#members" class="qn-item"><span class="qn-icon">◉</span> Our Riders</a>
+  <a href="#gallery" class="qn-item"><span class="qn-icon">▦</span> Gallery</a>
+  <a href="#contact" class="qn-item"><span class="qn-icon">◎</span> Join the Club</a>
+</div>
+
+<!-- ══ ABOUT ══ -->
+<section id="about">
+  <div class="about-l">
+    <div class="s-eye">About the Club</div>
+    <h2 class="s-h">Ride Together,<br/>Go Further</h2>
+    <p class="s-p">
+      BMW Motorrad Club Azerbaijan is built on a simple belief — the roads of this country deserve
+      to be explored on the finest motorcycles ever built. Our close-knit community shares a commitment
+      to the machine, the route, and each other.
+    </p>
+    <p class="s-p" style="margin-top:12px;">
+      From Caucasus mountain passes to the Caspian coast at sunset, we ride Azerbaijan
+      in the spirit BMW Motorrad was built for: precision, adventure, and freedom.
+    </p>
+    <div class="about-pillars">
+      <div class="pillar"><div class="pt">Brotherhood</div><div class="pd">Every rider looks out for the pack, on and off the road.</div></div>
+      <div class="pillar"><div class="pt">Precision</div><div class="pd">BMW-grade standards in both machines and route planning.</div></div>
+      <div class="pillar"><div class="pt">Adventure</div><div class="pd">New roads, new horizons. Always pushing further.</div></div>
+      <div class="pillar"><div class="pt">Safety</div><div class="pd">Full gear, every ride. No exceptions, no shortcuts.</div></div>
+    </div>
+  </div>
+  <div class="about-r">
+    <div class="about-r-bg"></div>
+    <div class="about-big-text">BMW<br/>MOTO</div>
+    <div class="about-badge">Baku, Azerbaijan</div>
+    <div class="about-yr">2024</div>
+  </div>
+</section>
+
+<!-- ══ EVENTS ══ -->
+<section id="events">
+  <div class="section-head">
+    <div><div class="s-eye">Club Calendar</div><h2 class="s-h">Upcoming Rides</h2></div>
+    <a href="#contact" class="btn-outline">All Events</a>
+  </div>
+  <div class="ev-grid">
+    <div class="ev-card">
+      <div class="ev-img"><div class="ev-img-inner ei-1" style="background-image:url('https://images.unsplash.com/photo-1677166270367-0687b04b7146?w=700&q=85');background-size:cover;background-position:center;"></div><div class="ev-img-hov"></div></div>
+      <div class="ev-body">
+        <div class="ev-top"><span class="ev-date">14 June 2025</span><span class="ev-tag">Day Ride</span></div>
+        <div class="ev-title">Lahij Mountain Pass</div>
+        <div class="ev-loc">Ismayilli · ~280 km round trip</div>
+        <div class="ev-more">Details</div>
+      </div>
+    </div>
+    <div class="ev-card">
+      <div class="ev-img"><div class="ev-img-inner ei-2" style="background-image:url('https://images.unsplash.com/photo-1657873956202-62890bd39a5c?w=700&q=85');background-size:cover;background-position:center;"></div><div class="ev-img-hov"></div></div>
+      <div class="ev-body">
+        <div class="ev-top"><span class="ev-date">22 June 2025</span><span class="ev-tag">Weekend</span></div>
+        <div class="ev-title">Sheki Caravanserai Route</div>
+        <div class="ev-loc">Sheki · ~460 km · 2 days</div>
+        <div class="ev-more">Details</div>
+      </div>
+    </div>
+    <div class="ev-card">
+      <div class="ev-img"><div class="ev-img-inner ei-3" style="background-image:url('https://images.unsplash.com/photo-1679252439326-ccd0a69abbf2?w=700&q=85');background-size:cover;background-position:center;"></div><div class="ev-img-hov"></div></div>
+      <div class="ev-body">
+        <div class="ev-top"><span class="ev-date">05 July 2025</span><span class="ev-tag">Evening</span></div>
+        <div class="ev-title">Baku Coastal Sunset Ride</div>
+        <div class="ev-loc">Baku Boulevard · ~60 km loop</div>
+        <div class="ev-more">Details</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MEMBERS ══ -->
+<section id="members">
+  <div class="s-eye">The Riders</div>
+  <h2 class="s-h inv" style="margin-bottom:4px;">Meet the Club</h2>
+  <p class="s-p inv">Seven riders. One mission. Every road in Azerbaijan.</p>
+  <div class="members-grid">
+    <div class="m-card"><div class="m-bar"></div><div class="m-av"><div class="m-av-bg" style="background-image:url('https://images.unsplash.com/photo-1635073943212-f34dfbfcc3b0?w=400&q=85');background-size:cover;background-position:center;"></div><div class="m-nr">#001</div></div><div class="m-info"><div class="m-name">Elvin Hasanov</div><div class="m-role">Club President</div><div class="m-bike">BMW R 1250 GS Adventure</div></div></div>
+    <div class="m-card"><div class="m-bar"></div><div class="m-av"><div class="m-av-bg" style="background-image:url('https://images.unsplash.com/photo-1635073948138-df07998b9135?w=400&q=85');background-size:cover;background-position:center;"></div><div class="m-nr">#002</div></div><div class="m-info"><div class="m-name">Anar Rzayev</div><div class="m-role">Road Captain</div><div class="m-bike">BMW S 1000 RR</div></div></div>
+    <div class="m-card"><div class="m-bar"></div><div class="m-av"><div class="m-av-bg" style="background-image:url('https://images.unsplash.com/photo-1685478564483-3613fbe7acb0?w=400&q=85');background-size:cover;background-position:center;"></div><div class="m-nr">#003</div></div><div class="m-info"><div class="m-name">Nigar Karimova</div><div class="m-role">Events Lead</div><div class="m-bike">BMW F 900 R</div></div></div>
+    <div class="m-card"><div class="m-bar"></div><div class="m-av"><div class="m-av-bg" style="background-image:url('https://images.unsplash.com/photo-1685478564488-6892188cb6b6?w=400&q=85');background-size:cover;background-position:center;"></div><div class="m-nr">#004</div></div><div class="m-info"><div class="m-name">Tural Mammadov</div><div class="m-role">Member</div><div class="m-bike">BMW R nineT</div></div></div>
+    <div class="m-card"><div class="m-bar"></div><div class="m-av"><div class="m-av-bg" style="background-image:url('https://images.unsplash.com/photo-1685478566013-8459140e1edb?w=400&q=85');background-size:cover;background-position:center;"></div><div class="m-nr">#005</div></div><div class="m-info"><div class="m-name">Samir Aliyev</div><div class="m-role">Member</div><div class="m-bike">BMW G 310 GS</div></div></div>
+    <div class="m-card"><div class="m-bar"></div><div class="m-av"><div class="m-av-bg" style="background-image:url('https://images.unsplash.com/photo-1744395627539-bdeaf7929d64?w=400&q=85');background-size:cover;background-position:center;"></div><div class="m-nr">#006</div></div><div class="m-info"><div class="m-name">Fidan Ismayilova</div><div class="m-role">Member</div><div class="m-bike">BMW C 400 X</div></div></div>
+    <div class="m-card"><div class="m-bar"></div><div class="m-av"><div class="m-av-bg" style="background-image:url('https://images.unsplash.com/photo-1559568692-2124937b35c6?w=400&q=85');background-size:cover;background-position:center;"></div><div class="m-nr">#007</div></div><div class="m-info"><div class="m-name">Rashad Huseynov</div><div class="m-role">Member</div><div class="m-bike">BMW R 1250 RT</div></div></div>
+    <div class="m-card m-open" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+      <div class="m-open-plus">+</div>
+      <div class="m-open-t">Open Slot</div>
+      <div class="m-open-t" style="color:rgba(28,105,212,0.4);margin-top:2px;">Your BMW Here</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GALLERY ══ -->
+<section id="gallery">
+  <div class="gallery-head">
+    <div><div class="s-eye">Ride Memories</div><h2 class="s-h">Gallery</h2></div>
+  </div>
+  <div class="g-mosaic">
+    <div class="g-item"><div class="g-bg" style="background-image:url('https://images.unsplash.com/photo-1635073891744-1e8a4e9cbe98?w=900&q=85');background-size:cover;background-position:center;"></div><div class="g-ov"><span class="g-cap">BMW S 1000 RR · Lahij 2024</span></div></div>
+    <div class="g-item"><div class="g-bg" style="background-image:url('https://images.unsplash.com/photo-1635073948138-df07998b9135?w=600&q=85');background-size:cover;background-position:center;"></div><div class="g-ov"><span class="g-cap">BMW M · Detail Shot</span></div></div>
+    <div class="g-item"><div class="g-bg" style="background-image:url('https://images.unsplash.com/photo-1685478564483-3613fbe7acb0?w=600&q=85');background-size:cover;background-position:center;"></div><div class="g-ov"><span class="g-cap">BMW Engine · Close-up</span></div></div>
+    <div class="g-item"><div class="g-bg" style="background-image:url('https://images.unsplash.com/photo-1685478564488-6892188cb6b6?w=600&q=85');background-size:cover;background-position:center;"></div><div class="g-ov"><span class="g-cap">BMW Roundel · Quba Ride</span></div></div>
+    <div class="g-item"><div class="g-bg" style="background-image:url('https://images.unsplash.com/photo-1559568692-2124937b35c6?w=600&q=85');background-size:cover;background-position:center;"></div><div class="g-ov"><span class="g-cap">BMW Night Ride · Baku</span></div></div>
+  </div>
+  <div class="gallery-foot">
+    <div class="gf-line"></div>
+    <a href="#contact" class="btn-outline">View All Photos</a>
+    <div class="gf-line"></div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="ct-l">
+    <div class="s-eye">Get in Touch</div>
+    <h2 class="s-h">Join the Ride</h2>
+    <p class="s-p">Whether you're a seasoned BMW rider or just starting your journey, we'd love to hear from you. Tell us about yourself and your machine.</p>
+    <div class="cp-list">
+      <div class="cp"><div class="cp-ico">📍</div><div><div class="cp-lbl">Base</div><div class="cp-val">Baku, Azerbaijan</div></div></div>
+      <div class="cp"><div class="cp-ico">✉</div><div><div class="cp-lbl">Email</div><div class="cp-val">info@bmwmotorrad.az</div></div></div>
+      <div class="cp"><div class="cp-ico">💬</div><div><div class="cp-lbl">WhatsApp</div><div class="cp-val">Available on request</div></div></div>
+      <div class="cp"><div class="cp-ico">📷</div><div><div class="cp-lbl">Instagram</div><div class="cp-val">@bmwmotorrad.az</div></div></div>
+    </div>
+  </div>
+  <div class="ct-r">
+    <div class="s-eye" style="margin-bottom:28px;">Membership Enquiry</div>
+    <form class="cf" onsubmit="handleSubmit(event)">
+      <div class="cf-row">
+        <div class="cf-g"><label class="cf-lbl">Full Name</label><input class="cf-in" type="text" placeholder="Your name" required/></div>
+        <div class="cf-g"><label class="cf-lbl">Email</label><input class="cf-in" type="email" placeholder="your@email.com" required/></div>
+      </div>
+      <div class="cf-g"><label class="cf-lbl">Your BMW Model</label><input class="cf-in" type="text" placeholder="e.g. BMW R 1250 GS Adventure"/></div>
+      <div class="cf-g"><label class="cf-lbl">Riding Experience</label><input class="cf-in" type="text" placeholder="e.g. 5 years"/></div>
+      <div class="cf-g"><label class="cf-lbl">Message</label><textarea class="cf-ta" placeholder="Tell us about yourself..."></textarea></div>
+      <button type="submit" class="cf-sub">Send Application →</button>
+    </form>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="ft">
+    <div class="ft-brand">
+      <div class="ft-r-sm">
+        <div class="ft-r-sm-q"><div class="ft-rq-tl"></div><div class="ft-rq-tr"></div><div class="ft-rq-bl"></div><div class="ft-rq-br"></div></div>
+        <div class="ft-r-sm-ring"></div>
+      </div>
+      <span class="ft-name">BMW Motorrad Club Azerbaijan</span>
+    </div>
+    <ul class="ft-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#members">Members</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <div class="fb">
+    <span class="fb-copy">© 2025 BMW Motorrad Club Azerbaijan · Fan club — not affiliated with BMW AG.</span>
+    <span class="fb-flag">🇦🇿 Baku</span>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════
+   SLIDER ENGINE — BMW Motorrad style
+══════════════════════════════════════════ */
+(function() {
+  const slides     = document.querySelectorAll('.slide');
+  const dots       = document.querySelectorAll('.s-dot');
+  const numEl      = document.getElementById('sl-num');
+  const bar        = document.getElementById('slider-progress-bar');
+  const pauseBtn   = document.getElementById('sl-pause');
+  const DURATION   = 6000; // ms per slide
+
+  let current = 0;
+  let playing = true;
+  let timer = null;
+  let startTime = null;
+  let rafId = null;
+  let elapsed = 0;
+
+  function goTo(idx) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (idx + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    numEl.textContent = `${current + 1} / ${slides.length}`;
+    resetProgress();
+  }
+
+  function resetProgress() {
+    bar.style.transition = 'none';
+    bar.style.width = '0%';
+    elapsed = 0;
+    if (playing) startProgress();
+  }
+
+  function startProgress() {
+    cancelAnimationFrame(rafId);
+    startTime = performance.now() - elapsed;
+    function tick(now) {
+      elapsed = now - startTime;
+      const pct = Math.min((elapsed / DURATION) * 100, 100);
+      bar.style.width = pct + '%';
+      if (elapsed >= DURATION) {
+        goTo(current + 1);
+      } else {
+        rafId = requestAnimationFrame(tick);
+      }
+    }
+    rafId = requestAnimationFrame(tick);
+  }
+
+  function pause() {
+    playing = false;
+    cancelAnimationFrame(rafId);
+    pauseBtn.textContent = '▶';
+    pauseBtn.setAttribute('aria-label', 'Play');
+  }
+
+  function play() {
+    playing = true;
+    pauseBtn.textContent = '⏸';
+    pauseBtn.setAttribute('aria-label', 'Pause');
+    startProgress();
+  }
+
+  document.getElementById('sl-prev').addEventListener('click', () => {
+    goTo(current - 1);
+    if (!playing) { pause(); }
+  });
+  document.getElementById('sl-next').addEventListener('click', () => {
+    goTo(current + 1);
+    if (!playing) { pause(); }
+  });
+  pauseBtn.addEventListener('click', () => playing ? pause() : play());
+  dots.forEach(d => d.addEventListener('click', () => {
+    goTo(+d.dataset.i);
+    if (!playing) { pause(); }
+  }));
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft')  { goTo(current - 1); if (!playing) pause(); }
+    if (e.key === 'ArrowRight') { goTo(current + 1); if (!playing) pause(); }
+  });
+
+  // Start
+  startProgress();
+})();
+
+/* ══ NAV scroll class ══ */
+const nav = document.getElementById('nav');
+const sliderEl = document.getElementById('slider');
+function updateNav() {
+  const past = window.scrollY > (sliderEl.offsetHeight - 64);
+  nav.classList.toggle('on-light', past);
+  nav.classList.toggle('on-dark', !past);
+}
+window.addEventListener('scroll', updateNav, { passive: true });
+updateNav();
+
+/* ══ Contact form ══ */
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.cf-sub');
+  const orig = btn.textContent;
+  btn.textContent = 'Application Sent ✓';
+  btn.style.background = '#0E4FA8';
+  setTimeout(() => { btn.textContent = orig; btn.style.background = ''; e.target.reset(); }, 3500);
+}
+</script>
+</body>
+</html>
