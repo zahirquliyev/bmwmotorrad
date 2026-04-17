@@ -806,9 +806,9 @@ footer {
   <!-- RIGHT: lang switcher + join -->
   <div class="nav-right-col">
     <div class="lang-switch">
-      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
       <div class="lang-sep"></div>
-      <button class="lang-btn" id="btn-az" onclick="setLang('az')">AZ</button>
+      <button class="lang-btn active" id="btn-az" onclick="setLang('az')">AZ</button>
     </div>
     <a href="#contact" class="nav-join" data-en="Join the Club" data-az="Kluba Qoşul">Join the Club</a>
   </div>
@@ -1154,7 +1154,7 @@ window.addEventListener('scroll', updateNav, { passive: true });
 updateNav();
 
 /* ══ i18n Language Switcher ══ */
-let currentLang = localStorage.getItem('bmwaz-lang') || 'en';
+let currentLang = localStorage.getItem('bmwaz-lang') || 'az';
 
 function setLang(lang) {
   currentLang = lang;
